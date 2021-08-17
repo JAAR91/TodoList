@@ -19,12 +19,6 @@ const printTodo = (item, TodosContainer) => {
     Todo.classList.add('list-group-item', 'd-flex', 'align-items-center'
     ,'p-3', 'justify-content-between');
     Todo.draggable = true;
-
-    const indexInput = document.createElement('input');
-    indexInput.type = 'hidden';
-    indexInput.id = 'index';
-    indexInput.value = item.index;
-    Todo.appendChild(indexInput);
     
     const checkInput = document.createElement('input');
     checkInput.classList.add('m-0');
