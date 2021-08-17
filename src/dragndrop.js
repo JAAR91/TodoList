@@ -20,10 +20,9 @@ const dragNdrop = (container) => {
         });
 
         item.addEventListener('dragenter', (e) => {
-            console.log(size/100);
             if (dragedItem !== item){
                 item.classList.remove('p-3');
-                item.style.heigh = '400%';
+                item.style.paddingTop = '80px';
                 item.style.backgroundImage = `linear-gradient(rgb(76, 89, 151), white, white)`;
             }
         });

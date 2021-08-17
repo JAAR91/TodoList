@@ -2,18 +2,15 @@ import './styles/bootstrap.css';
 import './styles/style.css';
 import Container from './domLoader.js';
 import dragNdrop from './dragndrop.js'
+import myTodoList from './constructor.js'
 
-let TodoList = [`Click on the text to edit`, `Drag 'n drop to reorder your list`, `Manage all your lists in one place`, `Resync to clear out the old`];
+myTodoList.new(false, `Click on the text to edit`);
+myTodoList.new(false, `Drag 'n drop to reorder your list`);
+myTodoList.new(false, `Manage all your lists in one place`);
+myTodoList.new(false, `Resync to clear out the old`);
 
-const deleteTodo = (TodosContainer, value) => {
-    let todosText = TodosContainer.querySelectorAll('p');
-    let todosArray = [];
-    todosText.forEach((item)=> {
-        if (item.textContent !== value){
-            todosArray.push(item.textContent);
-        }
-    });
-    TodoList = todosArray;
+const deleteTodo = (value) => {
+    myTodoList.delete(value);
     printTodoList();
 };
 
@@ -22,15 +19,21 @@ const printTodo = (item, TodosContainer) => {
     Todo.classList.add('list-group-item', 'd-flex', 'align-items-center'
     ,'p-3', 'justify-content-between');
     Todo.draggable = true;
+
+    const indexInput = document.createElement('input');
+    indexInput.type = 'hidden';
+    indexInput.value = item.index;
+    Todo.appendChild(indexInput);
     
     const checkInput = document.createElement('input');
     checkInput.classList.add('m-0');
     checkInput.type = 'checkbox';
+    checkInput.checked = item.completed;
     Todo.appendChild(checkInput);
 
     const text = document.createElement('p');
     text.classList.add('mx-2', 'my-0');
-    text.textContent = item;
+    text.textContent = item.description;
     Todo.appendChild(text);
 
     const deleteButton = document.createElement('button');
@@ -38,21 +41,15 @@ const printTodo = (item, TodosContainer) => {
     Todo.appendChild(deleteButton);
 
     deleteButton.addEventListener('click', ()=> {
-        deleteTodo(TodosContainer, text.textContent);
+        deleteTodo(indexInput.value);
     });
 
     TodosContainer.appendChild(Todo);
 };
 
-const addTodo = (e, Todos_Container, value) => {
+const addTodo = (e, value) => {
     if (e.key === 'Enter') {
-        let todosText = Todos_Container.querySelectorAll('p');
-        let todosArray = [];
-        todosText.forEach((item)=> {
-            todosArray.push(item.textContent);
-        });
-        todosArray.push(value);
-        TodoList = todosArray;
+        myTodoList.new(false, value);
         printTodoList();
     }
 };
@@ -87,18 +84,20 @@ const printTodoList = () => {
     const TodosContainer = document.createElement('ul');
     TodosContainer.classList.add('list-group', 'bg-dark', 'mt-2');
 
-    TodoList.forEach((item)=> {
+    TodosContainer.innerHTML = ``;
+
+    myTodoList.list.forEach((item)=> {
         printTodo(item, TodosContainer);
     });
     todosNform.appendChild(TodosContainer);
     Container.appendChild(todosNform);
 
 
-    TodosContainer.ondragstart = dragNdrop(TodosContainer);
+    TodosContainer.ondragstart = dragNdrop(TodosContainer, myTodoList);
     
 
     todoInput.addEventListener('keypress', (e) => {
-        addTodo(e, TodosContainer, todoInput.value);
+        addTodo(e, todoInput.value);
     });
 };
 
