@@ -22,6 +22,7 @@ const printTodo = (item, TodosContainer) => {
 
     const indexInput = document.createElement('input');
     indexInput.type = 'hidden';
+    indexInput.id = 'index';
     indexInput.value = item.index;
     Todo.appendChild(indexInput);
     
@@ -41,7 +42,7 @@ const printTodo = (item, TodosContainer) => {
     Todo.appendChild(deleteButton);
 
     deleteButton.addEventListener('click', ()=> {
-        deleteTodo(indexInput.value);
+        deleteTodo(item);
     });
 
     TodosContainer.appendChild(Todo);

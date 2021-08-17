@@ -1,4 +1,4 @@
-const dragNdrop = (container) => {
+const dragNdrop = (container, myTodoList) => {
     var dragedItem = null;
     const addAttributes = (item, size) => {
         
@@ -39,6 +39,8 @@ const dragNdrop = (container) => {
             if (dragedItem != item) {
                 dragedItem.innerHTML = item.innerHTML;
                 item.innerHTML = e.dataTransfer.getData('text/html');
+                myTodoList.swap(item.querySelector('input').value - 1,
+                dragedItem.querySelector('input').value - 1);
             }
                 
             return false;

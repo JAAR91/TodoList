@@ -9,9 +9,12 @@ function TodoList() {
     this.new = (completed, description) => {
         this.list.push(new Todo(this.list.length + 1, completed, description))
     };
-    this.delete = (value) =>{
-        let index = this.list.indexOf(value);
+    this.delete = (item) =>{
+        let index = this.list.indexOf(item);
         this.list.splice(index, 1);
+    };
+    this.swap = (indexa, indexb) => {
+        
     };
 }
 
