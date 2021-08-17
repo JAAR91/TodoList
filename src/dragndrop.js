@@ -1,6 +1,6 @@
 const dragNdrop = (container) => {
     var dragedItem = null;
-    const addAttributes = (item, size, index) => {
+    const addAttributes = (item, size) => {
         
 
         item.addEventListener('dragstart', (e) => {
@@ -20,14 +20,16 @@ const dragNdrop = (container) => {
         });
 
         item.addEventListener('dragenter', (e) => {
+            console.log(size/100);
             if (dragedItem !== item){
-                item.style.paddingTop = `${((1/size)*100)}%`;
+                item.classList.remove('p-3');
+                item.style.heigh = '400%';
                 item.style.backgroundImage = `linear-gradient(rgb(76, 89, 151), white, white)`;
             }
         });
 
         item.addEventListener('dragleave', (e) => {
-            item.style.paddingTop = `10px`;
+            item.classList.add('p-3');
             item.style.backgroundImage = `linear-gradient(white, white)`;
         });
 
@@ -47,7 +49,7 @@ const dragNdrop = (container) => {
             item.style.opacity = '1';
     
             items.forEach(function (item) {
-                item.style.paddingTop = `10px`;
+                item.classList.add('p-3');
                 item.style.backgroundImage = `linear-gradient(white, white)`;
             });
         });
