@@ -39,7 +39,7 @@ const dragNdrop = (container, myTodoList, printTodoList) => {
         item.innerHTML = e.dataTransfer.getData('text/html');
         myTodoList.swap(item.querySelector('input').value,
           replaceItem.querySelector('input').value);
-          printTodoList();
+        printTodoList();
       }
 
       return false;

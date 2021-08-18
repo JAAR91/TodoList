@@ -4,11 +4,6 @@ import Container from './domLoader.js';
 import dragNdrop from './dragndrop.js';
 import myTodoList from './constructor.js';
 
-// myTodoList.new(false, 'Click on the text to edit');
-// myTodoList.new(false, 'Drag \'n drop to reorder your list');
-// myTodoList.new(false, 'Manage all your lists in one place');
-// myTodoList.new(false, 'Resync to clear out the old');
-
 const printTodoList = () => {
   Container.innerHTML = '';
   const todosNform = document.createElement('div');

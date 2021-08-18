@@ -5,12 +5,14 @@ function Todo(index, completed, description) {
 }
 
 class TodoList {
-
   constructor() {
-    this.list = JSON.parse(localStorage.getItem('TodoList')) || [];
+    this.list = JSON.parse(localStorage.getItem('TodoList')) || [new Todo(1, false, 'Click on the text to edit'),
+      new Todo(2, false, 'Drag \'n drop to reorder your list'),
+      new Todo(3, false, 'Manage all your lists in one place'),
+      new Todo(4, false, 'Resync to clear out the old')];
   }
-  
-  new(completed, description){
+
+  new(completed, description) {
     this.list.push(new Todo(this.list.length + 1, completed, description));
     this.save();
   }
@@ -22,9 +24,9 @@ class TodoList {
   }
 
   swap(indexa, indexb) {
-    let x = this.list.findIndex((item) => item.index === parseInt(indexa, 10));
-    let y = this.list.findIndex((item) => item.index === parseInt(indexb, 10));
-    let todo1 = this.list[x];
+    const x = this.list.findIndex((item) => item.index === parseInt(indexa, 10));
+    const y = this.list.findIndex((item) => item.index === parseInt(indexb, 10));
+    const todo1 = this.list[x];
     this.list[x] = this.list[y];
     this.list[y] = todo1;
     this.save();
@@ -34,7 +36,7 @@ class TodoList {
     localStorage.setItem('TodoList', JSON.stringify(this.list));
   }
 
-  completed(index, value){
+  completed(index, value) {
     this.list.find((item) => item.index === parseInt(index, 10)).completed = value;
     this.save();
   }
