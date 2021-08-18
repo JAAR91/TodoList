@@ -84,3 +84,5 @@ const printTodoList = () => {
 };
 
 printTodoList();
+
+myTodoList.indexControl();

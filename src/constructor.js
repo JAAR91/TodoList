@@ -13,8 +13,12 @@ class TodoList {
   }
 
   new(completed, description) {
-    this.list.push(new Todo(this.list.length + 1, completed, description));
+    this.list.push(new Todo(this.indexControl(), completed, description));
     this.save();
+  }
+
+  indexControl() {
+    return this.list.reduce((prev, current)=>(prev.index > current.index) ? prev : current, 1).index + 1 || 1;
   }
 
   delete(indexInput) {
