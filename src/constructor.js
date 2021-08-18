@@ -18,7 +18,8 @@ class TodoList {
   }
 
   indexControl() {
-    return this.list.reduce((prev, current)=>(prev.index > current.index) ? prev : current, 1).index + 1 || 1;
+    return this.list.reduce((prev, current) => (
+      (prev.index > current.index) ? prev : current), 1).index + 1 || 1;
   }
 
   delete(indexInput) {
