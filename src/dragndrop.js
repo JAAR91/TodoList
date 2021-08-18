@@ -1,4 +1,4 @@
-const dragNdrop = (container, myTodoList) => {
+const dragNdrop = (container, myTodoList, printTodoList) => {
   const items = container.querySelectorAll('li');
   let replaceItem = null;
   items.forEach((item) => {
@@ -39,6 +39,7 @@ const dragNdrop = (container, myTodoList) => {
         item.innerHTML = e.dataTransfer.getData('text/html');
         myTodoList.swap(item.querySelector('input').value,
           replaceItem.querySelector('input').value);
+        printTodoList();
       }
 
       return false;
