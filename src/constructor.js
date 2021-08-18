@@ -12,8 +12,8 @@ class TodoList {
       new Todo(4, false, 'Resync to clear out the old')];
   }
 
-  new(completed, description) {
-    this.list.push(new Todo(this.indexControl(), completed, description));
+  new(description) {
+    this.list.push(new Todo(this.indexControl(), false, description));
     this.save();
   }
 

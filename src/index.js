@@ -30,7 +30,7 @@ const printTodoList = () => {
   todoInput.placeholder = 'Add to your list...';
   todoInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-      myTodoList.new(false, todoInput.value);
+      myTodoList.new(todoInput.value);
       printTodoList();
     }
   });
