@@ -46,8 +46,8 @@ class TodoList {
     this.save();
   }
 
-  deleteCompleted(){
-    this.list.filter(item => item.completed).forEach(element => {
+  deleteCompleted() {
+    this.list.filter((item) => item.completed).forEach((element) => {
       this.delete(element.index);
     });
   }

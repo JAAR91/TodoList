@@ -3,7 +3,6 @@ import './styles/style.css';
 import Container from './domLoader.js';
 import dragNdrop from './dragndrop.js';
 import myTodoList from './constructor.js';
-import { nextDay } from 'date-fns';
 
 const printTodoList = () => {
   Container.innerHTML = '';
@@ -12,7 +11,7 @@ const printTodoList = () => {
 
   const formContainer = document.createElement('ul');
   formContainer.classList.add('d-flex', 'flex-column',
-   'm-0', 'p-0', 'list-group-item');
+    'm-0', 'p-0', 'list-group-item');
   todosNform.appendChild(formContainer);
 
   const liContainer1 = document.createElement('li');
@@ -58,17 +57,17 @@ const printTodoList = () => {
     checkInput.classList.add('m-0');
     checkInput.type = 'checkbox';
     checkInput.checked = item.completed;
-    checkInput.addEventListener('change', () => {
-      myTodoList.completed(indexInput.value, checkInput.checked);
-      text.classList.toggle('text-decoration-line-through');
-    });
     Todo.appendChild(checkInput);
 
     const text = document.createElement('p');
     text.classList.add('mx-2', 'my-0', 'w-100');
-    if (checkInput.checked){
+    if (checkInput.checked) {
       text.classList.toggle('text-decoration-line-through');
     }
+    checkInput.addEventListener('change', () => {
+      myTodoList.completed(indexInput.value, checkInput.checked);
+      text.classList.toggle('text-decoration-line-through');
+    });
     text.textContent = item.description;
     Todo.appendChild(text);
 
@@ -96,19 +95,19 @@ const printTodoList = () => {
   const enableClearButton = () => {
     let count = 0;
     TodosContainer.querySelectorAll('input').forEach((item) => {
-      if (item.checked){
+      if (item.checked) {
         count += 1;
       }
     });
     if (count > 0) {
       clearCompleted.disabled = false;
-    }else {
+    } else {
       clearCompleted.disabled = true;
     }
-  }
+  };
 
-  TodosContainer.addEventListener('change', (event) => { 
-    if (event.target.type === 'checkbox' ){
+  TodosContainer.addEventListener('change', (event) => {
+    if (event.target.type === 'checkbox') {
       enableClearButton();
     }
   });
