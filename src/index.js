@@ -71,6 +71,30 @@ const printTodoList = () => {
     text.textContent = item.description;
     Todo.appendChild(text);
 
+    const editTodo = document.createElement('input');
+    editTodo.classList.add('d-none', 'mx-2', 'w-100');
+    editTodo.placeholder = item.description;
+    Todo.appendChild(editTodo);
+
+    text.addEventListener('click', () => {
+      editTodo.classList.toggle('d-none');
+      text.classList.toggle('d-none');
+      editTodo.value = '';
+      editTodo.focus();
+    });
+
+    editTodo.addEventListener('focusout', () => {
+      editTodo.classList.toggle('d-none');
+      text.classList.toggle('d-none');
+    });
+
+    editTodo.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        myTodoList.edit(indexInput.value, editTodo.value);
+        printTodoList();
+      }
+    });
+
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('deletebutton');
     Todo.appendChild(deleteButton);
