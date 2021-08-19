@@ -52,7 +52,7 @@ class TodoList {
     });
   }
 
-  edit(index, description){
+  edit(index, description) {
     this.list.find((item) => item.index === parseInt(index, 10)).description = description;
     this.save();
   }
