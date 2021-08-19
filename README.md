@@ -37,8 +37,7 @@ $ npm start
 ```
 
 ## Run the project
-```
-- To run the project you can type on the terminal:
+To run the project you can type on the terminal:
 ```
 npm start
 ```
