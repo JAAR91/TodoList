@@ -45,6 +45,12 @@ class TodoList {
     this.list.find((item) => item.index === parseInt(index, 10)).completed = value;
     this.save();
   }
+
+  deleteCompleted(){
+    this.list.filter(item => item.completed).forEach(element => {
+      this.delete(element.index);
+    });
+  }
 }
 
 const myTodoList = new TodoList();

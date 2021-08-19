@@ -16,3 +16,11 @@ select:focus {
   outline: none;
   border: 0;
 }
+
+.link-clear {
+  text-decoration: none;
+  columns: black;
+  background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  border: 2px solid rgb(219, 219, 219);
+}

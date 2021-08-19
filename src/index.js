@@ -3,19 +3,21 @@ import './styles/style.css';
 import Container from './domLoader.js';
 import dragNdrop from './dragndrop.js';
 import myTodoList from './constructor.js';
+import { nextDay } from 'date-fns';
 
 const printTodoList = () => {
   Container.innerHTML = '';
   const todosNform = document.createElement('div');
+  todosNform.classList.add('list-group', 'shadow');
 
   const formContainer = document.createElement('ul');
   formContainer.classList.add('d-flex', 'flex-column',
-    'p-2', 'm-0', 'list-group');
+   'm-0', 'p-0', 'list-group-item');
   todosNform.appendChild(formContainer);
 
   const liContainer1 = document.createElement('li');
   liContainer1.classList.add('list-group-item');
-  todosNform.appendChild(liContainer1);
+  formContainer.appendChild(liContainer1);
 
   const todoLabel = document.createElement('label');
   todoLabel.textContent = 'Demo';
@@ -23,7 +25,7 @@ const printTodoList = () => {
 
   const liContainer2 = document.createElement('li');
   liContainer2.classList.add('list-group-item');
-  todosNform.appendChild(liContainer2);
+  formContainer.appendChild(liContainer2);
 
   const todoInput = document.createElement('input');
   todoInput.classList.add('todoInput');
@@ -37,7 +39,7 @@ const printTodoList = () => {
   liContainer2.appendChild(todoInput);
 
   const TodosContainer = document.createElement('ul');
-  TodosContainer.classList.add('list-group', 'bg-dark', 'mt-2');
+  TodosContainer.classList.add('m-0', 'p-0', 'list-group-item');
 
   TodosContainer.innerHTML = '';
 
@@ -58,11 +60,15 @@ const printTodoList = () => {
     checkInput.checked = item.completed;
     checkInput.addEventListener('change', () => {
       myTodoList.completed(indexInput.value, checkInput.checked);
+      text.classList.toggle('text-decoration-line-through');
     });
     Todo.appendChild(checkInput);
 
     const text = document.createElement('p');
-    text.classList.add('mx-2', 'my-0');
+    text.classList.add('mx-2', 'my-0', 'w-100');
+    if (checkInput.checked){
+      text.classList.toggle('text-decoration-line-through');
+    }
     text.textContent = item.description;
     Todo.appendChild(text);
 
@@ -81,8 +87,38 @@ const printTodoList = () => {
   Container.appendChild(todosNform);
 
   TodosContainer.ondragstart = dragNdrop(TodosContainer, myTodoList, printTodoList);
+
+  const clearCompleted = document.createElement('button');
+  clearCompleted.classList.add('text-center', 'mx-auto', 'link-clear', 'list-group-item');
+  clearCompleted.textContent = 'Clear all completed';
+  todosNform.appendChild(clearCompleted);
+
+  const enableClearButton = () => {
+    let count = 0;
+    TodosContainer.querySelectorAll('input').forEach((item) => {
+      if (item.checked){
+        count += 1;
+      }
+    });
+    if (count > 0) {
+      clearCompleted.disabled = false;
+    }else {
+      clearCompleted.disabled = true;
+    }
+  }
+
+  TodosContainer.addEventListener('change', (event) => { 
+    if (event.target.type === 'checkbox' ){
+      enableClearButton();
+    }
+  });
+
+  clearCompleted.addEventListener('click', () => {
+    myTodoList.deleteCompleted();
+    printTodoList();
+  });
+
+  enableClearButton();
 };
 
 printTodoList();
-
-myTodoList.indexControl();
