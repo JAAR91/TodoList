@@ -38,6 +38,7 @@ const printTodoList = () => {
   liContainer2.appendChild(todoInput);
 
   const TodosContainer = document.createElement('ul');
+  TodosContainer.id = 'TodosContainer';
   TodosContainer.classList.add('m-0', 'p-0', 'list-group-item');
 
   TodosContainer.innerHTML = '';

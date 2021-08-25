@@ -35,4 +35,29 @@ describe('Testing constructor class functions', () => {
       expect(myTodoList.list).toEqual([new Todo(2, false, 'Task 2'), 
       new Todo(1, false, 'Task 1')]);
     });
+
+    test('Save function user localstorage to save the information', ()=> {
+      expect(myTodoList.list).toEqual(JSON.parse(localStorage.getItem('TodoList')));
+    })
+
+    test('Updates the completed property to true or false using index', ()=> {
+      myTodoList.completed(1, true);
+      expect(myTodoList.list[1].completed).toBe(true);
+    })
+
+    test('Updates the description property using index', ()=> {
+      myTodoList.edit(1, 'Edited Todo');
+      expect(myTodoList.list[1].description).toBe('Edited Todo');
+    })
+
+    test('Delete all Todo were compelted is true', ()=> {
+      myTodoList.new('Task 3');
+      myTodoList.new('Task 4');
+      myTodoList.new('Task 5');
+      myTodoList.completed(3, true);
+      myTodoList.completed(4, true);
+      myTodoList.completed(5, true);
+      myTodoList.deleteCompleted();
+      expect(myTodoList.list).toEqual([new Todo(2, false, 'Task 2')]);
+    })
 });
