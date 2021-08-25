@@ -1,4 +1,4 @@
-function Todo(index, completed, description) {
+export function Todo(index, completed, description) {
   this.index = index;
   this.completed = completed;
   this.description = description;
