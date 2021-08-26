@@ -146,3 +146,5 @@ const printTodoList = () => {
 };
 
 printTodoList();
+
+export default printTodoList;

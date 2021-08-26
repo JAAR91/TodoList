@@ -41,5 +41,10 @@
   },
   "dependencies": {
     "date-fns": "^2.22.1"
+  },
+  "jest":{
+    "moduleNameMapper":{
+         "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }

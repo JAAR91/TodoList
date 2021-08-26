@@ -1,5 +1,11 @@
-import localStorage from './LocalStorageMock.js';
-import myTodoList, { Todo } from './constructor.js';
+/**
+ * @jest-environment jsdom
+ */
+
+import localStorage from '../__mocks__/LocalStorageMock.js';
+import ContainerMock from '../__mocks__/ContainerMock.js';
+import myTodoList, { Todo } from '../src/constructor.js';
+import printTodoList from '../src/index.js';
 
 describe('Testing constructor class functions', () => {
   localStorage.clear();
@@ -58,5 +64,45 @@ describe('Testing constructor class functions', () => {
     myTodoList.completed(5, true);
     myTodoList.deleteCompleted();
     expect(myTodoList.list).toEqual([new Todo(2, false, 'Task 2')]);
+  });
+});
+
+describe('Dom test', () => {
+  ContainerMock.textContent = '';
+
+  test('print every element on the array', () => {
+    printTodoList();
+    const TodosContainer = document.getElementById('TodosContainer');
+    const countLi = TodosContainer.querySelectorAll('li').length;
+    expect(countLi).toBe(1);
+  });
+
+  test('Add new Todos to list and display updated list', () => {
+    myTodoList.new('New Todo 1');
+    myTodoList.new('New Todo 2');
+    printTodoList();
+    const TodosContainer = document.getElementById('TodosContainer');
+    const countLi = TodosContainer.querySelectorAll('li').length;
+    expect(countLi).toBe(3);
+  });
+
+  test('Remove Todo from list and display updated list', () => {
+    myTodoList.delete(2);
+    printTodoList();
+    const TodosContainer = document.getElementById('TodosContainer');
+    const countLi = TodosContainer.querySelectorAll('li').length;
+    expect(countLi).toBe(2);
+  });
+
+  test('Remove completed Todos from list and display updated list', () => {
+    myTodoList.new('Complete Test 1');
+    myTodoList.new('Complete Test 2');
+    myTodoList.completed(3, true);
+    myTodoList.completed(4, true);
+    myTodoList.deleteCompleted();
+    printTodoList();
+    const TodosContainer = document.getElementById('TodosContainer');
+    const countLi = TodosContainer.querySelectorAll('li').length;
+    expect(countLi).toBe(2);
   });
 });
