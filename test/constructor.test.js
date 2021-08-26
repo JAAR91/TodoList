@@ -74,4 +74,33 @@ describe('Dom test', () => {
     let countLi = TodosContainer.querySelectorAll('li').length;
     expect(countLi).toBe(1);
   });
+
+  test('Add new Todos to list and display updated list', () => {
+    myTodoList.new('New Todo 1');
+    myTodoList.new('New Todo 2');
+    printTodoList();
+    let TodosContainer = document.getElementById('TodosContainer');
+    let countLi = TodosContainer.querySelectorAll('li').length;
+    expect(countLi).toBe(3);
+  });
+
+  test('Remove Todo from list and display updated list', () => {
+    myTodoList.delete(2);
+    printTodoList();
+    let TodosContainer = document.getElementById('TodosContainer');
+    let countLi = TodosContainer.querySelectorAll('li').length;
+    expect(countLi).toBe(2);
+  });
+
+  test('Remove completed Todos from list and display updated list', () => {
+    myTodoList.new('Complete Test 1');
+    myTodoList.new('Complete Test 2');
+    myTodoList.completed(3, true);
+    myTodoList.completed(4, true);
+    myTodoList.deleteCompleted();
+    printTodoList();
+    let TodosContainer = document.getElementById('TodosContainer');
+    let countLi = TodosContainer.querySelectorAll('li').length;
+    expect(countLi).toBe(2);
+  });
 });
