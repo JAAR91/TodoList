@@ -1,5 +1,11 @@
-import localStorage from './LocalStorageMock.js';
-import myTodoList, { Todo } from './constructor.js';
+/**
+ * @jest-environment jsdom
+ */
+
+import localStorage from '../__mocks__/LocalStorageMock.js';
+import ContainerMock from '../__mocks__/ContainerMock.js';
+import myTodoList, { Todo } from '../src/constructor.js';
+import {printTodoList} from '../src/index.js';
 
 describe('Testing constructor class functions', () => {
   localStorage.clear();
@@ -58,5 +64,14 @@ describe('Testing constructor class functions', () => {
     myTodoList.completed(5, true);
     myTodoList.deleteCompleted();
     expect(myTodoList.list).toEqual([new Todo(2, false, 'Task 2')]);
+  });
+});
+
+describe('Dom test', () => {
+  test('print every element on the array', () => {
+    printTodoList();
+    let TodosContainer = document.getElementById('TodosContainer');
+    let countLi = TodosContainer.querySelectorAll('li').length;
+    expect(countLi).toBe(1);
   });
 });
