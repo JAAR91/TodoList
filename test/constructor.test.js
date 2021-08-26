@@ -5,7 +5,7 @@
 import localStorage from '../__mocks__/LocalStorageMock.js';
 import ContainerMock from '../__mocks__/ContainerMock.js';
 import myTodoList, { Todo } from '../src/constructor.js';
-import {printTodoList} from '../src/index.js';
+import printTodoList from '../src/index.js';
 
 describe('Testing constructor class functions', () => {
   localStorage.clear();
@@ -68,10 +68,12 @@ describe('Testing constructor class functions', () => {
 });
 
 describe('Dom test', () => {
+  ContainerMock.textContent = '';
+
   test('print every element on the array', () => {
     printTodoList();
-    let TodosContainer = document.getElementById('TodosContainer');
-    let countLi = TodosContainer.querySelectorAll('li').length;
+    const TodosContainer = document.getElementById('TodosContainer');
+    const countLi = TodosContainer.querySelectorAll('li').length;
     expect(countLi).toBe(1);
   });
 
@@ -79,16 +81,16 @@ describe('Dom test', () => {
     myTodoList.new('New Todo 1');
     myTodoList.new('New Todo 2');
     printTodoList();
-    let TodosContainer = document.getElementById('TodosContainer');
-    let countLi = TodosContainer.querySelectorAll('li').length;
+    const TodosContainer = document.getElementById('TodosContainer');
+    const countLi = TodosContainer.querySelectorAll('li').length;
     expect(countLi).toBe(3);
   });
 
   test('Remove Todo from list and display updated list', () => {
     myTodoList.delete(2);
     printTodoList();
-    let TodosContainer = document.getElementById('TodosContainer');
-    let countLi = TodosContainer.querySelectorAll('li').length;
+    const TodosContainer = document.getElementById('TodosContainer');
+    const countLi = TodosContainer.querySelectorAll('li').length;
     expect(countLi).toBe(2);
   });
 
@@ -99,8 +101,8 @@ describe('Dom test', () => {
     myTodoList.completed(4, true);
     myTodoList.deleteCompleted();
     printTodoList();
-    let TodosContainer = document.getElementById('TodosContainer');
-    let countLi = TodosContainer.querySelectorAll('li').length;
+    const TodosContainer = document.getElementById('TodosContainer');
+    const countLi = TodosContainer.querySelectorAll('li').length;
     expect(countLi).toBe(2);
   });
 });

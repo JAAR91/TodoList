@@ -4,7 +4,7 @@ import Container from './domLoader.js';
 import dragNdrop from './dragndrop.js';
 import myTodoList from './constructor.js';
 
-export const printTodoList = () => {
+const printTodoList = () => {
   Container.innerHTML = '';
   const todosNform = document.createElement('div');
   todosNform.classList.add('list-group', 'shadow');
@@ -146,3 +146,5 @@ export const printTodoList = () => {
 };
 
 printTodoList();
+
+export default printTodoList;
