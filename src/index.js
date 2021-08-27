@@ -1,4 +1,3 @@
-import './styles/bootstrap.css';
 import './styles/style.css';
 import Container from './domLoader.js';
 import dragNdrop from './dragndrop.js';

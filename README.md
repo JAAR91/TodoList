@@ -1,10 +1,6 @@
 # TODO List
 
-This project its a simple Todo control app, that allows you to create a list with all your Todos, delete then and add new ones. The project includes:
-
-- DOM Manipulation with JavaScript
-- Webpack
-- Use of JavaScript functions and loops
+A task app that provides control over all of your tasks on a list, you add, remove, and mark tasks as completed. The project includes a drag n drop feature that allows to re-arrange all task inside the list. Tests with jest included. Build with JavaScript.
 
 ## Live Server
 - [click here](https://jaar91.github.io/TodoList/)
